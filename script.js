@@ -19,9 +19,11 @@ function displayLocation(position) {
 	displayP.innerHTML = "I'm at latitude: " + latitude + ", longitude: "
 	 + longitude;
 
-	 var km = computeDistance(position.coords, wickedlyCoords);
-	 var distance = document.getElementById("distance");
-	 distance.innerHTML = "I'm " + km + "km from the WickedlySmart HQ!";
+	var km = computeDistance(position.coords, wickedlyCoords);
+	var distance = document.getElementById("distance");
+	distance.innerHTML = "I'm " + km + "km from the WickedlySmart HQ!";
+
+	showMap(position.coords);
 
 }
 function displayError(error) {
@@ -55,10 +57,48 @@ function computeDistance(startCoords, destCoords) {
 	return distance;
 
 }
-
 function degreesToRadians(degrees) {
 	var radians = (degrees * Math.PI)/180;
 	return radians;
 }
+
+//应用谷歌地图
+var map;
+function showMap(coords) {
+	var googleLatAndLong = new google.maps.LatLng(coords.latitude,coords.longitude);
+	var mapOptions = {
+		zoom: 10,
+		center:googleLatAndLong,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	var mapDiv = document.getElementById("map");
+	map = new google.maps.Map(mapDiv, mapOptions);
+
+
+	var title = "My Location";
+	var content = "I'm here: " + coords.latitude + ", " + coords.longitude;
+	addMarker(map, googleLatAndLong, title, content);
+}
+
+//给谷歌地图中特定位置加标记
+function addMarker(map, latlong, title, content) {
+	var markerOptions = {
+		position: latlong,
+		map: map,
+		title: title,
+		clickable: true
+	};
+	var marker = new google.maps.Marker(markerOptions);
+
+	var infoWindowOptions = {
+		content: content,
+		position: latlong
+	};
+	var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+	google.maps.event.addListener(marker, "click", function() {
+		infoWindow.open(map);  //在地图上打开信息窗口
+	});
+}
+ 
 
 window.onload = getMyLocation;
