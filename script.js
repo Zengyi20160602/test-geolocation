@@ -9,7 +9,7 @@ var wickedlyCoords = {
 var positionOptions = {
 	enableHighAccuracy : true,
 	timeout : 100,
-	maximumAge : 60000
+	maximumAge : 0
 };
 
 function getMyLocation() {
