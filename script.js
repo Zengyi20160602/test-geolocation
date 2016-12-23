@@ -14,11 +14,11 @@ var positionOptions = {
 
 function getMyLocation() {
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(displayLocation, displayError, positionOptions);
-		/*var watchButton = document.getElementById("watch");
+		//navigator.geolocation.getCurrentPosition(displayLocation, displayError, positionOptions);
+		var watchButton = document.getElementById("watch");
 		watchButton.onclick = watchLocation;
 		var clearWatchButton = document.getElementById("clearWatch");
-		clearWatchButton.onclick = clearWatch;*/
+		clearWatchButton.onclick = clearWatch;
 	}
 	else {
 		alert("no geolocation support");
