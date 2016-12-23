@@ -1,3 +1,6 @@
+var watchId = null;
+var map;
+
 var wickedlyCoords = {
 	latitude: 47.624851,
 	longitude: -122.52099
@@ -5,7 +8,11 @@ var wickedlyCoords = {
 
 function getMyLocation() {
 	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(displayLocation, displayError);
+		//navigator.geolocation.getCurrentPosition(displayLocation, displayError);
+		var watchButton = document.getElementById("watch");
+		watchButton.onclick = watchLocation;
+		var clearWatchButton = document.getElementById("clearWatch");
+		clearWatchButton.onclick = clearWatch;
 	}
 	else {
 		alert("no geolocation support");
@@ -24,7 +31,10 @@ function displayLocation(position) {
 	var distance = document.getElementById("distance");
 	distance.innerHTML = "I'm " + km + "km from the WickedlySmart HQ!";
 
-	showMap(position.coords);
+	if (map == null) {
+		showMap(position.coords);
+	}
+	
 
 }
 function displayError(error) {
@@ -64,7 +74,7 @@ function degreesToRadians(degrees) {
 }
 
 //应用谷歌地图
-var map;
+
 function showMap(coords) {
 	var googleLatAndLong = new google.maps.LatLng(coords.latitude,coords.longitude);
 	var mapOptions = {
@@ -101,5 +111,16 @@ function addMarker(map, latlong, title, content) {
 	});
 }
  
+function watchLocation() {
+	watchId = navigator.geolocation.watchPosition(displayLocation,displayError);
+}
+
+function clearWatch() {
+	if (watchId) {
+		navigator.geolocation.clearWatch(watchId);
+		watchId = null;
+	}
+}
+
 
 window.onload = getMyLocation;
