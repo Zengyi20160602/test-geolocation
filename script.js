@@ -1,9 +1,15 @@
 var watchId = null;
 var map;
 
+
 var wickedlyCoords = {
 	latitude: 47.624851,
 	longitude: -122.52099
+};
+var positionOptions = {
+	enableHighAccuracy : true,
+	timeout : 5000,
+	maximumAge : 60000
 };
 
 function getMyLocation() {
@@ -112,7 +118,7 @@ function addMarker(map, latlong, title, content) {
 }
  
 function watchLocation() {
-	watchId = navigator.geolocation.watchPosition(displayLocation,displayError);
+	watchId = navigator.geolocation.watchPosition(displayLocation,displayError,positionOptions);
 }
 
 function clearWatch() {
