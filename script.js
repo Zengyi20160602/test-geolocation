@@ -8,7 +8,7 @@ var wickedlyCoords = {
 };
 var positionOptions = {
 	enableHighAccuracy : true,
-	timeout : 5000,
+	timeout : 100,
 	maximumAge : 60000
 };
 
