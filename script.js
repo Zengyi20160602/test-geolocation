@@ -18,7 +18,7 @@ function displayLocation(position) {
 	var displayP = document.getElementById("outMyLocation");
 	displayP.innerHTML = "I'm at latitude: " + latitude + ", longitude: "
 	 + longitude;
-	 displayP.innerHTML = " (with " + position.coords.accuracy + " meters accuracy)";
+	 displayP.innerHTML += " (with " + position.coords.accuracy + " meters accuracy)";
 
 	var km = computeDistance(position.coords, wickedlyCoords);
 	var distance = document.getElementById("distance");
