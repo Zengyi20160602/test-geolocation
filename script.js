@@ -32,7 +32,8 @@ function displayLocation(position) {
 	displayP.innerHTML = "I'm at latitude: " + latitude + ", longitude: "
 	 + longitude;
 	 displayP.innerHTML += " (with " + position.coords.accuracy + " meters accuracy)";
-
+	displayP.innerHTML += " (found in " + positionOptions.timeout/1000 + " seconds)";
+	
 	var km = computeDistance(position.coords, wickedlyCoords);
 	var distance = document.getElementById("distance");
 	distance.innerHTML = "I'm " + km + "km from the WickedlySmart HQ!";
