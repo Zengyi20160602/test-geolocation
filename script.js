@@ -31,7 +31,7 @@ function displayLocation(position) {
 	var displayP = document.getElementById("outMyLocation");
 	displayP.innerHTML = "I'm at latitude: " + latitude + ", longitude: "
 	 + longitude;
-	 displayP.innerHTML += " (with " + position.coords.accuracy + " meters accuracy)";
+	displayP.innerHTML += " (with " + position.coords.accuracy + " meters accuracy)";
 	displayP.innerHTML += " (found in " + positionOptions.timeout/1000 + " seconds)";
 	
 	var km = computeDistance(position.coords, wickedlyCoords);
@@ -59,8 +59,8 @@ function displayError(error) {
 	displayP.innerHTML = errorMessage;
 
 	positionOptions.timeout += 100;
-	displayP.innerHTML += " ...... checking again with timeout=" + options.timeout;
-	navigator.geolocation.getCurrentPosition(displayLocation,displayError,positionOptions);
+	displayP.innerHTML += " ...... checking again with timeout=" + positionOptions.timeout;
+	navigator.geolocation.getCurrentPosition(displayLocation, displayError, positionOptions);
 	
 }
 
