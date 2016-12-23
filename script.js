@@ -14,11 +14,11 @@ var positionOptions = {
 
 function getMyLocation() {
 	if (navigator.geolocation) {
-		//navigator.geolocation.getCurrentPosition(displayLocation, displayError);
-		var watchButton = document.getElementById("watch");
+		navigator.geolocation.getCurrentPosition(displayLocation, displayError,positionOptions);
+		/*var watchButton = document.getElementById("watch");
 		watchButton.onclick = watchLocation;
 		var clearWatchButton = document.getElementById("clearWatch");
-		clearWatchButton.onclick = clearWatch;
+		clearWatchButton.onclick = clearWatch;*/
 	}
 	else {
 		alert("no geolocation support");
@@ -56,6 +56,10 @@ function displayError(error) {
 	}
 	var displayP = document.getElementById("outMyLocation");
 	displayP.innerHTML = errorMessage;
+
+	positionOptions.timeout += 100;
+	navigator.geolocation.getCurrentPosition(displayLocation,displayError,positionOptions);
+	displayP.innerHTML += " ...... checking again with timeout=" + options.timeout;
 }
 
 
