@@ -6,11 +6,11 @@ var wickedlyCoords = {
 	latitude: 47.624851,
 	longitude: -122.52099
 };
-var positionOptions = {
+/*var positionOptions = {
 	enableHighAccuracy : true,
 	timeout : 100,
 	maximumAge : 0
-};
+};*/
 
 function getMyLocation() {
 	if (navigator.geolocation) {
@@ -61,10 +61,10 @@ function displayError(error) {
 	var displayP = document.getElementById("outMyLocation");
 	displayP.innerHTML = errorMessage;
 
-	positionOptions.timeout += 100;
+	/*positionOptions.timeout += 100;
 	displayP.innerHTML += " ...... checking again with timeout=" + positionOptions.timeout;
-	navigator.geolocation.getCurrentPosition(displayLocation, displayError, positionOptions);
-	
+	navigator.geolocation.getCurrentPosition(displayLocation, displayError,positionOptions);
+	*/
 }
 
 
@@ -127,7 +127,7 @@ function addMarker(map, latlong, title, content) {
 }
  
 function watchLocation() {
-	watchId = navigator.geolocation.watchPosition(displayLocation,displayError,positionOptions);
+	watchId = navigator.geolocation.watchPosition(displayLocation,displayError);
 }
 
 function clearWatch() {
